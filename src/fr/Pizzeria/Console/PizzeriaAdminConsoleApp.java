@@ -10,14 +10,14 @@ public class PizzeriaAdminConsoleApp {
 		/* initialisation du tableau de pizzas */
 		Pizza[] tempP;
 		Pizza[] p = new Pizza[8];
-		p[0]= new Pizza(0,"PEP","Pépéroni",12.50);
-		p[1]= new Pizza(1,"MAR","Margherita",14.00);
-		p[2]= new Pizza(2,"REIN","La Reine",11.50);
-		p[3]= new Pizza(3,"FRO","La 4 fromages",12.00);
-		p[4]= new Pizza(4,"CAN","La cannibale",12.50);
-		p[5]= new Pizza(5,"SAV","La savoyarde",13.00);
-		p[6]= new Pizza(6,"ORI","L'orientale",13.50);
-		p[7]= new Pizza(7,"IND","L'indienne",14.00);
+		p[0]= new Pizza("PEP","Pépéroni",12.50);
+		p[1]= new Pizza("MAR","Margherita",14.00);
+		p[2]= new Pizza("REIN","La Reine",11.50);
+		p[3]= new Pizza("FRO","La 4 fromages",12.00);
+		p[4]= new Pizza("CAN","La cannibale",12.50);
+		p[5]= new Pizza("SAV","La savoyarde",13.00);
+		p[6]= new Pizza("ORI","L'orientale",13.50);
+		p[7]= new Pizza("IND","L'indienne",14.00);
 		
 		/* Variables */
 		int i;
@@ -44,7 +44,7 @@ public class PizzeriaAdminConsoleApp {
 			case 1:
 				System.out.println("Liste des pizzas :");
 				for(i=0;i<p.length;i++){
-					System.out.println(p[i].getCode()+" -> "+p[i].getLibelle()+" ("+p[i].getPrix()+")");
+					System.out.println(p[i].getId()+" "+p[i].getCode()+" -> "+p[i].getLibelle()+" ("+p[i].getPrix()+")");
 				}
 				break;
 			case 2:

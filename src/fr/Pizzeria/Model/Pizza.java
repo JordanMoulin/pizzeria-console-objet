@@ -5,9 +5,12 @@ public class Pizza {
 	String code;
 	String libelle;
 	double prix;
+	
+	static int compteur;
 
 	public Pizza(String code,String libelle,double prix){
-		this.id=id++;
+		compteur++;
+		this.id=compteur;
 		this.code=code;
 		this.libelle=libelle;
 		this.prix=prix;
