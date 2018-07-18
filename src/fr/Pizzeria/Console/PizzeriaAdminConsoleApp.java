@@ -112,7 +112,6 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println("Aurevoir :'(");
 				break;
 			}
-			
 		}
 		scanner.close();
 	}
