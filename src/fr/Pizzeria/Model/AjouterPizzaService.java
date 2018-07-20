@@ -18,6 +18,5 @@ public class AjouterPizzaService extends MenuService {
 		prix = scanner.nextInt();
 		newPizza = new Pizza(code,nom,prix);
 		pizzas.saveNewPizza(newPizza);
-		
 	}
 }

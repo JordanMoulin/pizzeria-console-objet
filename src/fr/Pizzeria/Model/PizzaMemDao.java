@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class PizzaMemDao implements IPizzaDao {
 	private ArrayList<Pizza> pizzas;
-	
+
 	public PizzaMemDao(){
 		pizzas = new ArrayList<Pizza>();
 		pizzas.add(new Pizza("PEP","Pépéroni",12.50));
@@ -32,12 +32,12 @@ public class PizzaMemDao implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza newPizza) {
-			int i = pizzas.indexOf(findPizzaByCode(codePizza));
-			if(pizzas.get(i).getCode().equals(codePizza)){
-				pizzas.get(i).setCode(newPizza.getCode());
-				pizzas.get(i).setLibelle(newPizza.getLibelle());
-				pizzas.get(i).setPrix(newPizza.getPrix());
-			}
+		int i = pizzas.indexOf(findPizzaByCode(codePizza));
+		if(pizzas.get(i).getCode().equals(codePizza)){
+			pizzas.get(i).setCode(newPizza.getCode());
+			pizzas.get(i).setLibelle(newPizza.getLibelle());
+			pizzas.get(i).setPrix(newPizza.getPrix());
+		}
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class PizzaMemDao implements IPizzaDao {
 			}
 		}
 	}
-	
+
 
 	@Override
 	public boolean pizzaExists(String codePizza) {

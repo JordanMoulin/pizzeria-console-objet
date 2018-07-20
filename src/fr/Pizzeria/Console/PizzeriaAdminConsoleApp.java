@@ -3,21 +3,17 @@ package fr.Pizzeria.Console;
 import java.util.Scanner;
 
 import fr.Pizzeria.Model.AjouterPizzaService;
-import fr.Pizzeria.Model.Pizza;
+import fr.Pizzeria.Model.ListerPizzasService;
+import fr.Pizzeria.Model.ModifierPizzaService;
 import fr.Pizzeria.Model.PizzaMemDao;
+import fr.Pizzeria.Model.SupprimerPizzaService;
 
 public class PizzeriaAdminConsoleApp {
 	public static void main(String[] args) {
 
-		PizzaMemDao pizzas = new PizzaMemDao();
-
 		/* Variables */
+		PizzaMemDao pizzas = new PizzaMemDao();
 		int choixM = 0;
-		String choixP;
-		String code;
-		String nom;
-		double prix;
-		Pizza newPizza;
 		Scanner scanner = new Scanner(System.in);
 
 		/* Boucle pour rester dans le menu */
@@ -33,33 +29,20 @@ public class PizzeriaAdminConsoleApp {
 
 			switch(choixM){
 			case 1:
-				System.out.println("Liste des pizzas :");
-				pizzas.findAllPizzas();
+				ListerPizzasService listPizza = new ListerPizzasService();
+				listPizza.executeUC(scanner, pizzas);
 				break;
 			case 2:
-				AjouterPizzaService addPizza= new AjouterPizzaService();
-				
+				AjouterPizzaService addPizza = new AjouterPizzaService();
+				addPizza.executeUC(scanner,pizzas);
 				break;
 			case 3:
-				System.out.println("Mise à jour d’une pizza :");
-				pizzas.findAllPizzas();
-				System.out.println("Choisir le code de la pizza à modifier :");
-				choixP = scanner.next();
-				System.out.println("Veuillez saisir le nouveau code :");
-				code = scanner.next();
-				System.out.println("Veuillez saisir le nouveau nom :");
-				nom = scanner.next();
-				System.out.println("Veuillez saisir le nouveau prix :");
-				prix = scanner.nextDouble();
-				newPizza = new Pizza(code,nom,prix);
-				pizzas.updatePizza(choixP, newPizza);
+				ModifierPizzaService modifPizza = new ModifierPizzaService();
+				modifPizza.executeUC(scanner, pizzas);
 				break;
 			case 4:
-				System.out.println("Suppression d’une pizza :");
-				pizzas.findAllPizzas();
-				System.out.println("Veuillez choisir le code de la pizza à supprimer :");
-				choixP = scanner.next();
-				pizzas.deletePizza(choixP);
+				SupprimerPizzaService supprPizza = new SupprimerPizzaService();
+				supprPizza.executeUC(scanner, pizzas);
 				break;
 			default:
 				System.out.println("Aurevoir :'(");

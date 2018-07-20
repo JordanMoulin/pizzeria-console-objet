@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class ListerPizzasService extends MenuService {
 
 	@Override
-	void executeUC(Scanner scanner,PizzaMemDao pizzas) {
-		// TODO Auto-generated method stub
-		
+	public void executeUC(Scanner scanner,PizzaMemDao pizzas) {
+		System.out.println("Liste des pizzas :");
+		pizzas.findAllPizzas();
 	}
 
 }
