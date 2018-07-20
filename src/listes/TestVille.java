@@ -15,7 +15,7 @@ public class TestVille {
 		villes.add(new Ville("Tarbes",40600));
 		
 		int longueur = villes.get(0).getNbHabitants();
-		int resultL = 0;
+		int plage = 100000;
 
 		/** recherche de la ville avec le plus d'habitants */
 		for(int i=0;i<villes.size()-1;i++){
@@ -23,6 +23,25 @@ public class TestVille {
 				longueur = villes.get(i).getNbHabitants();
 			}
 		}
-		System.out.println(longueur);
+		//System.out.println(longueur);
+		
+		/** recherche de la ville avec le plus petit nombre d'habitants */
+		for(int i=0;i<villes.size()-1;i++){
+			if(villes.get(i).getNbHabitants()<longueur){
+				longueur = villes.get(i).getNbHabitants();
+			}
+		}
+		//System.out.println(longueur);
+		
+		/** Mets les noms de villes en majuscules */
+		for(int i=0; i<villes.size();i++){
+			if(villes.get(i).getNbHabitants()>plage){
+				villes.get(i).setNom(villes.get(i).getNom().toUpperCase());;
+			}
+		}
+		/** affiche tous les éléments de la liste */
+		for(int i=0;i<villes.size();i++){
+			System.out.println("Ville : "+villes.get(i).getNom()+", habitants : "+villes.get(i).getNbHabitants());
+		}
 	}
 }

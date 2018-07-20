@@ -24,5 +24,10 @@ public class Ville {
 	public void setNbHabitants(int nbHabitants) {
 		this.nbHabitants = nbHabitants;
 	}
+
+	@Override
+	public String toString() {
+		return "Ville =" + nom + ", nbHabitants=" + nbHabitants;
+	}
 	
 }
