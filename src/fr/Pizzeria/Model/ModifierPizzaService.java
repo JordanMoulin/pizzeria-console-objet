@@ -24,15 +24,7 @@ public class ModifierPizzaService extends MenuService {
 		prix = scanner.nextDouble();
 		System.out.println("Veuillez saisir la categorie de pizza (Viande/Poisson/Sans Viande)");
 		cat = scanner.next();
-		if(cat.compareTo("Viande")==0){
-			newPizza = new Pizza(code,nom,prix,CategoriePizza.VIANDE);
-		}else if(cat.compareTo("Poisson")==0){
-			newPizza = new Pizza(code,nom,prix,CategoriePizza.POISSON);
-		}else if(cat.compareTo("Sans Viande")==0){
-			newPizza = new Pizza(code,nom,prix,CategoriePizza.SANS_VIANDE);
-		}else{
-			System.out.println(cat+" n'est pas une catégorie de pizza valable, veuillez recommencer !");
-		}
+		newPizza = new Pizza(code,nom,prix,CategoriePizza.valueOf(cat));
 		pizzas.updatePizza(choixP, newPizza);
 
 	}

@@ -2,6 +2,7 @@ package fr.Pizzeria.Console;
 
 import java.util.Scanner;
 
+import fr.Pizzeria.Exception.SavePizzaException;
 import fr.Pizzeria.Model.AjouterPizzaService;
 import fr.Pizzeria.Model.ListerPizzasService;
 import fr.Pizzeria.Model.ModifierPizzaService;
@@ -34,7 +35,11 @@ public class PizzeriaAdminConsoleApp {
 				break;
 			case 2:
 				AjouterPizzaService addPizza = new AjouterPizzaService();
-				addPizza.executeUC(scanner,pizzas);
+				try {
+					addPizza.executeUC(scanner,pizzas);
+				} catch (SavePizzaException e) {
+					System.out.println(e.getMessage());
+				}
 				break;
 			case 3:
 				ModifierPizzaService modifPizza = new ModifierPizzaService();

@@ -2,6 +2,8 @@ package fr.Pizzeria.Model;
 
 import java.util.Scanner;
 
+import fr.Pizzeria.Exception.SavePizzaException;
+
 public class AjouterPizzaService extends MenuService {
 	private String code;
 	private String nom;
@@ -10,7 +12,7 @@ public class AjouterPizzaService extends MenuService {
 	private String cat;
 
 	@Override
-	public void executeUC(Scanner scanner, PizzaMemDao pizzas) {
+	public void executeUC(Scanner scanner, PizzaMemDao pizzas) throws SavePizzaException {
 		System.out.println("Ajout d’une nouvelle pizza :\n Veuillez saisir le code :");
 		code = scanner.next();
 		System.out.println("Veuillez saisir le nom (sans espace) :");
@@ -26,8 +28,9 @@ public class AjouterPizzaService extends MenuService {
 		}else if(cat.compareTo("Sans Viande")==0){
 			newPizza = new Pizza(code,nom,prix,CategoriePizza.SANS_VIANDE);
 		}else{
-			System.out.println(cat+" n'est pas une catégorie de pizza valable, veuillez recommencer !");
+			throw new SavePizzaException(cat+" n'est pas une catégorie valable");
 		}
+		//newPizza = new Pizza(code,nom,prix,CategoriePizza.valueOf(cat));
 		pizzas.saveNewPizza(newPizza);
 	}
 }
