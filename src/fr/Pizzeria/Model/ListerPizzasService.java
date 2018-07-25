@@ -9,5 +9,4 @@ public class ListerPizzasService extends MenuService {
 		System.out.println("Liste des pizzas :");
 		pizzas.findAllPizzas();
 	}
-
 }

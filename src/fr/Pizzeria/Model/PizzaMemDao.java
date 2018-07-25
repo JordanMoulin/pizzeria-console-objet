@@ -57,8 +57,13 @@ public class PizzaMemDao implements IPizzaDao {
 
 
 	public boolean pizzaExists(String codePizza) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean test = false;
+		for(int i=0;i<pizzas.size();i++){
+			if(pizzas.get(i).getCode().equals(codePizza)){
+				test = true;
+			}
+		}
+		return test;
 	}
 
 }

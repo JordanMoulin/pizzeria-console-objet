@@ -19,26 +19,28 @@ public class ModifierPizzaService extends MenuService {
 		pizzas.findAllPizzas();
 		System.out.println("Choisir le code de la pizza à modifier :");
 		choixP = scanner.next();
-		
-		System.out.println("Veuillez saisir le nouveau code (3 lettres) :");
-		code = scanner.next();
-		System.out.println("Veuillez saisir le nouveau nom (sans espace) :");
-		nom = scanner.next();
-		System.out.println("Veuillez saisir le nouveau prix :");
-		prix = scanner.next();
-		if(!NumberUtils.isCreatable(prix)){
-			throw new UpdatePizzaException("Ce n'est pas un prix !");
-		}else{
-			System.out.println("Veuillez saisir la categorie de pizza (Viande/Poisson/Sans Viande) :");
-			cat = scanner.next();
-			cat = cat.toUpperCase();
-			if(cat.compareTo("VIANDE")==0 || cat.compareTo("POISSON")==0 || cat.compareTo("SANS VIANDE")==0){
-				newPizza = new Pizza(code,nom,Double.parseDouble(prix),CategoriePizza.valueOf(cat));
-			}else{
-				throw new UpdatePizzaException(cat+" n'est pas une catégorie valable");
+		if(pizzas.pizzaExists(choixP)){
+			System.out.println("Veuillez saisir le nouveau code (3 lettres) :");
+			code = scanner.next();
+			System.out.println("Veuillez saisir le nouveau nom (sans espace) :");
+			nom = scanner.next();
+			System.out.println("Veuillez saisir le nouveau prix :");
+			prix = scanner.next();
+			if(!NumberUtils.isCreatable(prix)){
+				throw new UpdatePizzaException("Ce n'est pas un prix !");
+			}else {
+				System.out.println("Veuillez saisir la categorie de pizza (Viande/Poisson/Sans Viande) :");
+				cat = scanner.next();
+				cat = cat.toUpperCase();
+				if(cat.compareTo("VIANDE")==0 || cat.compareTo("POISSON")==0 || cat.compareTo("SANS VIANDE")==0){
+					newPizza = new Pizza(code,nom,Double.parseDouble(prix),CategoriePizza.valueOf(cat));
+				}else{
+					throw new UpdatePizzaException(cat+" n'est pas une catégorie valable");
+				}
+				pizzas.updatePizza(choixP, newPizza);
 			}
-			pizzas.updatePizza(choixP, newPizza);
+		}else {
+			throw new UpdatePizzaException("Aucune pizza ne correspond !");
 		}
-		
 	}
 }
