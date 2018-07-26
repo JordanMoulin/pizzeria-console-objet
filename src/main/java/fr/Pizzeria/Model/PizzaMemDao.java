@@ -1,6 +1,7 @@
 package fr.Pizzeria.Model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PizzaMemDao implements IPizzaDao {
 	private ArrayList<Pizza> pizzas;
@@ -17,18 +18,20 @@ public class PizzaMemDao implements IPizzaDao {
 		pizzas.add(new Pizza("IND","L'indienne",14.00,CategoriePizza.VIANDE));
 	}
 
-	public Pizza[] findAllPizzas() {
-		for(int i=0;i<pizzas.size();i++){
-			System.out.println(pizzas.get(i).getCode()+" -> "+pizzas.get(i).getLibelle()+" ("+pizzas.get(i).getPrix()+
-					") : "+pizzas.get(i).getCat().getNom());
-		}
-		return null;
+	/** Trouve et affiche toutes les pizzas */
+	@Override
+	public List<Pizza> findAllPizzas() {
+		return pizzas;
 	}
 
+	/** Permet de sauvegarder une nouvelle pizza */
+	@Override
 	public void saveNewPizza(Pizza newPizza) {
 		pizzas.add(newPizza);
 	}
 
+	/** Permet de modifier une pizza */
+	@Override
 	public void updatePizza(String codePizza, Pizza newPizza) {
 		int i = pizzas.indexOf(findPizzaByCode(codePizza));
 		if(pizzas.get(i).getCode().equals(codePizza)){
@@ -38,6 +41,8 @@ public class PizzaMemDao implements IPizzaDao {
 		}
 	}
 
+	/** Permet de rechercher une pizza grâce à son code */
+	@Override
 	public Pizza findPizzaByCode(String codePizza) {
 		int result = 0;
 		for(int i=0;i<pizzas.size();i++){
@@ -47,6 +52,9 @@ public class PizzaMemDao implements IPizzaDao {
 		}
 		return pizzas.get(result);
 	}
+	
+	/** Permet de supprimer une pizza */
+	@Override
 	public void deletePizza(String codePizza) {
 		for(int i=0;i<pizzas.size();i++){
 			if(pizzas.get(i).getCode().equals(codePizza)){
@@ -55,15 +63,16 @@ public class PizzaMemDao implements IPizzaDao {
 		}
 	}
 
-
+	/** Permet de rechercher si une pizza existe */
+	@Override
 	public boolean pizzaExists(String codePizza) {
-		boolean test = false;
+		boolean existe = false;
 		for(int i=0;i<pizzas.size();i++){
 			if(pizzas.get(i).getCode().equals(codePizza)){
-				test = true;
+				existe = true;
 			}
 		}
-		return test;
+		return existe;
 	}
 
 }

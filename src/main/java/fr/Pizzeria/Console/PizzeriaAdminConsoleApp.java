@@ -3,8 +3,10 @@ package fr.Pizzeria.Console;
 import java.util.Scanner;
 
 import fr.Pizzeria.Exception.SavePizzaException;
+import fr.Pizzeria.Exception.StockageException;
 import fr.Pizzeria.Exception.UpdatePizzaException;
 import fr.Pizzeria.Model.AjouterPizzaService;
+import fr.Pizzeria.Model.ExportPizza;
 import fr.Pizzeria.Model.ListerPizzasService;
 import fr.Pizzeria.Model.ModifierPizzaService;
 import fr.Pizzeria.Model.PizzaMemDao;
@@ -14,7 +16,7 @@ public class PizzeriaAdminConsoleApp {
 	public static void main(String[] args) {
 
 		/* Variables */
-		PizzaMemDao pizzas = new PizzaMemDao();
+		PizzaMemDao dao = new PizzaMemDao();
 		int choixM = 0;
 		Scanner scanner = new Scanner(System.in);
 
@@ -26,18 +28,19 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("2. Ajouter une nouvelle pizza");
 			System.out.println("3. Mettre à jour une pizza");
 			System.out.println("4. Supprimer une pizza");
+			System.out.println("5. Exporter la liste des pizzas");
 			System.out.println("99. Sortir");
 			choixM = scanner.nextInt();
 
 			switch(choixM){
 			case 1:
 				ListerPizzasService listPizza = new ListerPizzasService();
-				listPizza.executeUC(scanner, pizzas);
+				listPizza.executeUC(scanner, dao);
 				break;
 			case 2:
 				AjouterPizzaService addPizza = new AjouterPizzaService();
 				try {
-					addPizza.executeUC(scanner,pizzas);
+					addPizza.executeUC(scanner,dao);
 				} catch (SavePizzaException e) {
 					System.out.println(e.getMessage());
 				}
@@ -45,17 +48,24 @@ public class PizzeriaAdminConsoleApp {
 			case 3:
 				ModifierPizzaService modifPizza = new ModifierPizzaService();
 				try {
-					modifPizza.executeUC(scanner, pizzas);
+					modifPizza.executeUC(scanner, dao);
 				} catch (UpdatePizzaException e) {
 					System.out.println(e.getMessage());
 				}
 				break;
 			case 4:
 				SupprimerPizzaService supprPizza = new SupprimerPizzaService();
-				supprPizza.executeUC(scanner, pizzas);
+				supprPizza.executeUC(scanner, dao);
 				break;
-			default:
+			case 5:
+				ExportPizza pdfPizza = new ExportPizza();
+				pdfPizza.executeUC(scanner, dao);
+				break;
+			case 99:
 				System.out.println("Aurevoir :'(");
+				break;
+			default :
+				System.out.println("Rentrez un chiffre valable !");
 				break;
 			}
 		}
