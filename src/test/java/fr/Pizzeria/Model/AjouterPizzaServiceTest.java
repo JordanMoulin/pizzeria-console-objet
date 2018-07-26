@@ -1,15 +1,11 @@
 package fr.Pizzeria.Model;
 
 import static org.junit.Assert.*;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
-
 import fr.Pizzeria.Exception.SavePizzaException;
-
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.*;
-
 import java.util.Scanner;
 
 public class AjouterPizzaServiceTest {
@@ -26,7 +22,7 @@ public class AjouterPizzaServiceTest {
 			ajout.executeUC(new Scanner(System.in), dao);
 			assertEquals(9,dao.findAllPizzas().size());
 		} catch (SavePizzaException e) {
-			System.out.println("echec");
+			fail(" !!!!!!! Echec !!!!!!! ");
 		}
 		
 	}
