@@ -6,6 +6,14 @@ import java.util.List;
 public class PizzaMemDao implements IPizzaDao {
 	private ArrayList<Pizza> pizzas;
 
+	public ArrayList<Pizza> getPizzas() {
+		return pizzas;
+	}
+
+	public void setPizzas(ArrayList<Pizza> pizzas) {
+		this.pizzas = pizzas;
+	}
+
 	public PizzaMemDao(){
 		pizzas = new ArrayList<Pizza>();
 		pizzas.add(new Pizza("PEP","Pépéroni",12.50,CategoriePizza.SANS_VIANDE));
@@ -33,24 +41,23 @@ public class PizzaMemDao implements IPizzaDao {
 	/** Permet de modifier une pizza */
 	@Override
 	public void updatePizza(String codePizza, Pizza newPizza) {
-		int i = pizzas.indexOf(findPizzaByCode(codePizza));
-		if(pizzas.get(i).getCode().equals(codePizza)){
-			pizzas.get(i).setCode(newPizza.getCode());
-			pizzas.get(i).setLibelle(newPizza.getLibelle());
-			pizzas.get(i).setPrix(newPizza.getPrix());
+		Pizza pizza = findPizzaByCode(codePizza);
+		if (pizza!=null){
+			pizza.setCode(newPizza.getCode());
+			pizza.setLibelle(newPizza.getLibelle());
+			pizza.setPrix(newPizza.getPrix());
 		}
 	}
 
 	/** Permet de rechercher une pizza grâce à son code */
 	@Override
 	public Pizza findPizzaByCode(String codePizza) {
-		int result = 0;
-		for(int i=0;i<pizzas.size();i++){
+		for (int i=0;i<pizzas.size();i++){
 			if(pizzas.get(i).getCode().equals(codePizza)){
-				result=i;
+				return pizzas.get(i);
 			}
 		}
-		return pizzas.get(result);
+		return null;
 	}
 	
 	/** Permet de supprimer une pizza */

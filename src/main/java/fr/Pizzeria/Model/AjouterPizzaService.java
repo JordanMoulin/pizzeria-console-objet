@@ -14,7 +14,7 @@ public class AjouterPizzaService extends MenuService {
 	private String cat;
 
 	@Override
-	public void executeUC(Scanner scanner, PizzaMemDao pizzas) throws SavePizzaException {
+	public void executeUC(Scanner scanner, PizzaMemDao dao) throws SavePizzaException {
 		System.out.println("Ajout d’une nouvelle pizza :\n Veuillez saisir le code (3 lettres) :");
 		code = scanner.next();
 		System.out.println("Veuillez saisir le nom (sans espace) :");
@@ -32,7 +32,7 @@ public class AjouterPizzaService extends MenuService {
 			}else{
 				throw new SavePizzaException(cat+" n'est pas une catégorie valable");
 			}
-			pizzas.saveNewPizza(newPizza);
+			dao.saveNewPizza(newPizza);
 		}
 	}
 }
