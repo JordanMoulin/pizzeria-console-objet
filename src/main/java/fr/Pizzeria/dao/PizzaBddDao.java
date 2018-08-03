@@ -25,7 +25,7 @@ public class PizzaBddDao implements IPizzaDao {
 				// Déplacement du curseur
 				// -> return true si il y a un prochain élement, false sinon
 				while (resultSet.next()) {
-					int id = resultSet.getInt("id");
+					// int id = resultSet.getInt("id");
 					String code = resultSet.getString("code");
 					String libelle = resultSet.getString("libelle");
 					double prix = resultSet.getDouble("prix");
@@ -49,32 +49,27 @@ public class PizzaBddDao implements IPizzaDao {
 
 	@Override
 	public void saveNewPizza(Pizza pizza) {
-		// pizzas.add(pizza);
-		// try (PreparedStatement statement = connexion.prepareStatement("select
-		// * from pizzas")) {
-		// // Récupération du curseur de résultat de l'exécution de la
-		// // requêteSQL
-		// try (ResultSet resultSet = statement.executeQuery()) {
-		// // Déplacement du curseur
-		// // -> return true si il y a un prochain élement, false sinon
-		// while (resultSet.next()) {
-		// int id = resultSet.getInt("id");
-		// String code = resultSet.getString("code");
-		// String libelle = resultSet.getString("libelle");
-		// double prix = resultSet.getDouble("prix");
-		// String categorie = resultSet.getString("categorie");
-		// pizzas.add(pizza);
-		// assert !pizzas.isEmpty();
-		// }
-		//
-		// } catch (SQLException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// } catch (Exception e) {
-		// // TODO: handle exception
-		// e.printStackTrace();
-		// }
+		pizzas.add(pizza);
+		try (PreparedStatement statement = connexion
+				.prepareStatement("insert into pizzas (code,libelle,prix,categorie) values(?,?,?,?)")) {
+			// Récupération du curseur de résultat de l'exécution de la
+			// requêteSQL
+			// Valorisation du paramètre
+			statement.setString(1, pizza.getCode());
+			statement.setString(2, pizza.getLibelle());
+			statement.setDouble(3, pizza.getPrix());
+			statement.setString(4, pizza.getCat().toString());
+
+			try (ResultSet resultSet = statement.executeQuery()) {
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	@Override
