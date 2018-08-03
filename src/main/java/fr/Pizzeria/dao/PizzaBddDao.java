@@ -74,8 +74,27 @@ public class PizzaBddDao implements IPizzaDao {
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
-		// TODO Auto-generated method stub
+		try (PreparedStatement statement = connexion
+				.prepareStatement("update pizzas set code = ?, libelle = ?, prix = ?, categorie = ? where code =?")) {
+			// Récupération du curseur de résultat de l'exécution de la
+			// requêteSQL
+			// Valorisation du paramètre
+			statement.setString(1, pizza.getCode());
+			statement.setString(2, pizza.getLibelle());
+			statement.setDouble(3, pizza.getPrix());
+			statement.setString(4, pizza.getCat().toString());
+			statement.setString(5, codePizza);
 
+			try (ResultSet resultSet = statement.executeQuery()) {
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	@Override

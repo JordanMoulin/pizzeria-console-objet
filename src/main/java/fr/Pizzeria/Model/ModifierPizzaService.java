@@ -13,7 +13,7 @@ public class ModifierPizzaService extends MenuService {
 	private String nom;
 	private String prix;
 	private Pizza newPizza;
-	private String cat;
+	private int cat;
 
 	@Override
 	public void executeUC(Scanner scanner, PizzaBddDao pizzas) throws UpdatePizzaException {
@@ -31,14 +31,17 @@ public class ModifierPizzaService extends MenuService {
 			if (!NumberUtils.isCreatable(prix)) {
 				throw new UpdatePizzaException("Ce n'est pas un prix !");
 			} else {
-				System.out.println("Veuillez saisir la categorie de pizza (Viande/Poisson/Sans_Viande) :");
-				cat = scanner.next();
-				cat = cat.toUpperCase();
-				if (cat.compareTo("VIANDE") == 0 || cat.compareTo("POISSON") == 0
-						|| cat.compareTo("SANS_VIANDE") == 0) {
-					newPizza = new Pizza(code, nom, Double.parseDouble(prix), CategoriePizza.valueOf(cat));
+				System.out
+						.println("Veuillez saisir la categorie de pizza \n 1: Viande \n 2: Sans Viande \n 3: Poisson");
+				cat = scanner.nextInt();
+				if (cat == 1) {
+					newPizza = new Pizza(code, nom, Double.parseDouble(prix), CategoriePizza.valueOf("VIANDE"));
+				} else if (cat == 2) {
+					newPizza = new Pizza(code, nom, Double.parseDouble(prix), CategoriePizza.valueOf("SANS_VIANDE"));
+				} else if (cat == 3) {
+					newPizza = new Pizza(code, nom, Double.parseDouble(prix), CategoriePizza.valueOf("POISSON"));
 				} else {
-					throw new UpdatePizzaException(cat + " n'est pas une catégorie valable");
+					throw new UpdatePizzaException("Ce n'est pas une catégorie valable");
 				}
 				pizzas.updatePizza(choixP, newPizza);
 			}
