@@ -1,27 +1,27 @@
-package fr.Pizzeria.Console;
+package fr.pizzeria.console;
 
 import java.util.Scanner;
 
-import fr.Pizzeria.Exception.SavePizzaException;
-import fr.Pizzeria.Exception.StockageException;
-import fr.Pizzeria.Exception.UpdatePizzaException;
-import fr.Pizzeria.Model.AjouterPizzaService;
-import fr.Pizzeria.Model.ExportPizza;
-import fr.Pizzeria.Model.ListerPizzasService;
-import fr.Pizzeria.Model.ModifierPizzaService;
-import fr.Pizzeria.Model.PizzaMemDao;
-import fr.Pizzeria.Model.SupprimerPizzaService;
+import fr.pizzeria.dao.PizzaBddDao;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.AjouterPizzaService;
+import fr.pizzeria.model.ExportPizza;
+import fr.pizzeria.model.ListerPizzasService;
+import fr.pizzeria.model.ModifierPizzaService;
+import fr.pizzeria.model.SupprimerPizzaService;
 
 public class PizzeriaAdminConsoleApp {
 	public static void main(String[] args) {
 
 		/* Variables */
-		PizzaMemDao dao = new PizzaMemDao();
+		// PizzaMemDao dao = new PizzaMemDao();
+		PizzaBddDao dao = new PizzaBddDao();
 		int choixM = 0;
 		Scanner scanner = new Scanner(System.in);
 
 		/* Boucle pour rester dans le menu */
-		while(choixM != 99){
+		while (choixM != 99) {
 
 			System.out.println("***** Pizzeria Administration *****  ");
 			System.out.println("1. Lister les pizzas");
@@ -32,7 +32,7 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("99. Sortir");
 			choixM = scanner.nextInt();
 
-			switch(choixM){
+			switch (choixM) {
 			case 1:
 				ListerPizzasService listPizza = new ListerPizzasService();
 				listPizza.executeUC(scanner, dao);
@@ -40,7 +40,7 @@ public class PizzeriaAdminConsoleApp {
 			case 2:
 				AjouterPizzaService addPizza = new AjouterPizzaService();
 				try {
-					addPizza.executeUC(scanner,dao);
+					addPizza.executeUC(scanner, dao);
 				} catch (SavePizzaException e) {
 					System.out.println(e.getMessage());
 				}
@@ -64,7 +64,7 @@ public class PizzeriaAdminConsoleApp {
 			case 99:
 				System.out.println("Aurevoir :'(");
 				break;
-			default :
+			default:
 				System.out.println("Rentrez un chiffre valable !");
 				break;
 			}

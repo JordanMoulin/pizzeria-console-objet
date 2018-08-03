@@ -1,4 +1,4 @@
-package fr.Pizzeria.Exception;
+package fr.pizzeria.exception;
 
 public class SavePizzaException extends StockageException {
 
@@ -6,5 +6,5 @@ public class SavePizzaException extends StockageException {
 		super(msg);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 }

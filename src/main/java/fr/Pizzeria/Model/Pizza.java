@@ -1,20 +1,19 @@
-package fr.Pizzeria.Model;
+package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
 
-import fr.Pizzeria.Utils.StringUtils;
-import fr.Pizzeria.Utils.ToString;
+import fr.pizzeria.utils.ToString;
 
 public class Pizza {
-	private int id; 
+	private int id;
 
-	@ToString(uppercase=true, apres=" -> ")
+	@ToString(uppercase = true, apres = " -> ")
 	private String code;
 
-	@ToString(avant="",uppercase=true)
+	@ToString(avant = "", uppercase = true)
 	private String libelle;
 
-	@ToString(avant=" (",apres="€)")
+	@ToString(avant = " (", apres = "€)")
 	private double prix;
 
 	private CategoriePizza cat;
@@ -26,22 +25,23 @@ public class Pizza {
 	public void setCat(CategoriePizza cat) {
 		this.cat = cat;
 	}
+
 	static int compteur;
 
-	public Pizza(String code,String libelle,double prix,CategoriePizza cat){
+	public Pizza(String code, String libelle, double prix, CategoriePizza cat) {
 		compteur++;
-		this.id=compteur;
-		this.code=code;
-		this.libelle=libelle;
-		this.prix=prix;
-		this.cat=cat;
+		this.id = compteur;
+		this.code = code;
+		this.libelle = libelle;
+		this.prix = prix;
+		this.cat = cat;
 	}
 
-	public Pizza(int id,String code,String libelle,double prix){
-		this.id=id;
-		this.code=code;
-		this.libelle=libelle;
-		this.prix=prix;
+	public Pizza(int id, String code, String libelle, double prix) {
+		this.id = id;
+		this.code = code;
+		this.libelle = libelle;
+		this.prix = prix;
 	}
 
 	@Override
@@ -75,19 +75,19 @@ public class Pizza {
 		String upperChaine = "";
 		Class structure = this.getClass();
 		Field[] fields = structure.getDeclaredFields();
-		for(Field field: fields){
-			if (field.isAnnotationPresent(ToString.class)){
+		for (Field field : fields) {
+			if (field.isAnnotationPresent(ToString.class)) {
 				ToString annotation = field.getAnnotation(ToString.class);
 				String apres = annotation.apres();
 				String avant = annotation.avant();
 				boolean a = annotation.uppercase();
 				try {
-					if(a){
+					if (a) {
 						upperChaine = (String) field.get(this);
 						upperChaine = upperChaine.toUpperCase();
-						chaine+=avant+upperChaine+apres;
-					}else{
-						chaine+=avant+field.get(this)+apres;
+						chaine += avant + upperChaine + apres;
+					} else {
+						chaine += avant + field.get(this) + apres;
 					}
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
@@ -101,29 +101,35 @@ public class Pizza {
 		return chaine;
 	}
 
-	public int getId(){
+	public int getId() {
 		return id;
 	}
-	public String getCode(){
+
+	public String getCode() {
 		return code;
 	}
-	public String getLibelle(){
+
+	public String getLibelle() {
 		return libelle;
 	}
-	public double getPrix(){
+
+	public double getPrix() {
 		return prix;
 	}
 
-	public void setId(int sId){
+	public void setId(int sId) {
 		id = sId;
 	}
-	public void setCode(String sCode){
+
+	public void setCode(String sCode) {
 		code = sCode;
 	}
-	public void setLibelle(String sLibelle){
+
+	public void setLibelle(String sLibelle) {
 		libelle = sLibelle;
 	}
-	public void setPrix(double sPrix){
+
+	public void setPrix(double sPrix) {
 		prix = sPrix;
 	}
 }

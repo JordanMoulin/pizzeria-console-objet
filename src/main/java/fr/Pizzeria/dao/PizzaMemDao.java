@@ -1,7 +1,10 @@
-package fr.Pizzeria.Model;
+package fr.pizzeria.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.pizzeria.model.CategoriePizza;
+import fr.pizzeria.model.Pizza;
 
 public class PizzaMemDao implements IPizzaDao {
 	private ArrayList<Pizza> pizzas;
@@ -14,16 +17,16 @@ public class PizzaMemDao implements IPizzaDao {
 		this.pizzas = pizzas;
 	}
 
-	public PizzaMemDao(){
+	public PizzaMemDao() {
 		pizzas = new ArrayList<Pizza>();
-		pizzas.add(new Pizza("PEP","Pépéroni",12.50,CategoriePizza.SANS_VIANDE));
-		pizzas.add(new Pizza("MAR","Margherita",14.00,CategoriePizza.POISSON));
-		pizzas.add(new Pizza("REIN","La Reine",11.50,CategoriePizza.SANS_VIANDE));
-		pizzas.add(new Pizza("FRO","La 4 fromages",12.00,CategoriePizza.SANS_VIANDE));
-		pizzas.add(new Pizza("CAN","La cannibale",12.50,CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("SAV","La savoyarde",13.00,CategoriePizza.SANS_VIANDE));
-		pizzas.add(new Pizza("ORI","L'orientale",13.50,CategoriePizza.VIANDE));
-		pizzas.add(new Pizza("IND","L'indienne",14.00,CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.SANS_VIANDE));
+		pizzas.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.POISSON));
+		pizzas.add(new Pizza("REIN", "La Reine", 11.50, CategoriePizza.SANS_VIANDE));
+		pizzas.add(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.SANS_VIANDE));
+		pizzas.add(new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.SANS_VIANDE));
+		pizzas.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
+		pizzas.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
 	}
 
 	/** Trouve et affiche toutes les pizzas */
@@ -42,7 +45,7 @@ public class PizzaMemDao implements IPizzaDao {
 	@Override
 	public void updatePizza(String codePizza, Pizza newPizza) {
 		Pizza pizza = findPizzaByCode(codePizza);
-		if (pizza!=null){
+		if (pizza != null) {
 			pizza.setCode(newPizza.getCode());
 			pizza.setLibelle(newPizza.getLibelle());
 			pizza.setPrix(newPizza.getPrix());
@@ -52,19 +55,19 @@ public class PizzaMemDao implements IPizzaDao {
 	/** Permet de rechercher une pizza grâce à son code */
 	@Override
 	public Pizza findPizzaByCode(String codePizza) {
-		for (int i=0;i<pizzas.size();i++){
-			if(pizzas.get(i).getCode().equals(codePizza)){
+		for (int i = 0; i < pizzas.size(); i++) {
+			if (pizzas.get(i).getCode().equals(codePizza)) {
 				return pizzas.get(i);
 			}
 		}
 		return null;
 	}
-	
+
 	/** Permet de supprimer une pizza */
 	@Override
 	public void deletePizza(String codePizza) {
-		for(int i=0;i<pizzas.size();i++){
-			if(pizzas.get(i).getCode().equals(codePizza)){
+		for (int i = 0; i < pizzas.size(); i++) {
+			if (pizzas.get(i).getCode().equals(codePizza)) {
 				pizzas.remove(i);
 			}
 		}
@@ -74,8 +77,8 @@ public class PizzaMemDao implements IPizzaDao {
 	@Override
 	public boolean pizzaExists(String codePizza) {
 		boolean existe = false;
-		for(int i=0;i<pizzas.size();i++){
-			if(pizzas.get(i).getCode().equals(codePizza)){
+		for (int i = 0; i < pizzas.size(); i++) {
+			if (pizzas.get(i).getCode().equals(codePizza)) {
 				existe = true;
 			}
 		}

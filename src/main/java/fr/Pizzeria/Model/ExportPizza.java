@@ -1,4 +1,4 @@
-package fr.Pizzeria.Model;
+package fr.pizzeria.model;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,11 +9,12 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
+import fr.pizzeria.dao.PizzaBddDao;
 
 public class ExportPizza extends MenuService {
 
 	@Override
-	public void executeUC(Scanner scanner, PizzaMemDao pizzas)  {
+	public void executeUC(Scanner scanner, PizzaBddDao pizzas) {
 		Document document = new Document();
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream("iTextTable.pdf"));
@@ -24,12 +25,13 @@ public class ExportPizza extends MenuService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
+
 		document.open();
-		 
+
 		PdfPTable table = new PdfPTable(1);
-		for(int i=0;i<pizzas.findAllPizzas().size();i++){
-			table.addCell(pizzas.findAllPizzas().get(i).getCode()+" -> "+pizzas.findAllPizzas().get(i).getLibelle()+", "+pizzas.findAllPizzas().get(i).getPrix()+"€");
+		for (int i = 0; i < pizzas.findAllPizzas().size(); i++) {
+			table.addCell(pizzas.findAllPizzas().get(i).getCode() + " -> " + pizzas.findAllPizzas().get(i).getLibelle()
+					+ ", " + pizzas.findAllPizzas().get(i).getPrix() + "€");
 		}
 		try {
 			document.add(table);
@@ -38,7 +40,7 @@ public class ExportPizza extends MenuService {
 			e.printStackTrace();
 		}
 		document.close();
-		
+
 	}
 
 }
