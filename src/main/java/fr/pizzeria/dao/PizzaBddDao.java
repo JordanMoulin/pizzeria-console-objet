@@ -53,28 +53,27 @@ public class PizzaBddDao implements IPizzaDao {
 	public void saveNewPizza(Pizza pizza) {
 		if(pizzas.isEmpty()){
 			findAllPizzas();
-		}else {
-			pizzas.add(pizza);
-			try (PreparedStatement statement = connexion
-					.prepareStatement("insert into pizzas (code,libelle,prix,categorie) values(?,?,?,?)")) {
-				// Récupération du curseur de résultat de l'exécution de la
-				// requêteSQL
-				// Valorisation du paramètre
-				statement.setString(1, pizza.getCode());
-				statement.setString(2, pizza.getLibelle());
-				statement.setDouble(3, pizza.getPrix());
-				statement.setString(4, pizza.getCat().toString());
+		}
+		pizzas.add(pizza);
+		try (PreparedStatement statement = connexion
+				.prepareStatement("insert into pizzas (code,libelle,prix,categorie) values(?,?,?,?)")) {
+			// Récupération du curseur de résultat de l'exécution de la
+			// requêteSQL
+			// Valorisation du paramètre
+			statement.setString(1, pizza.getCode());
+			statement.setString(2, pizza.getLibelle());
+			statement.setDouble(3, pizza.getPrix());
+			statement.setString(4, pizza.getCat().toString());
 
-				try (ResultSet resultSet = statement.executeQuery()) {
+			try (ResultSet resultSet = statement.executeQuery()) {
 
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			} catch (Exception e) {
-				// TODO: handle exception
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
@@ -105,8 +104,25 @@ public class PizzaBddDao implements IPizzaDao {
 
 	@Override
 	public void deletePizza(String codePizza) {
-		// TODO Auto-generated method stub
+		if(pizzaExists(codePizza)){
+			try (PreparedStatement statement = connexion
+					.prepareStatement("delete from pizzas where code=?")) {
+				// Récupération du curseur de résultat de l'exécution de la
+				// requêteSQL
+				// Valorisation du paramètre
+				statement.setString(1, codePizza);
 
+				try (ResultSet resultSet = statement.executeQuery()) {
+
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("La pizza que vous voulez supprimez n'existe pas");
+		}
 	}
 
 	@Override
@@ -125,7 +141,11 @@ public class PizzaBddDao implements IPizzaDao {
 			statement.setString(1, codePizza);
 
 			try (ResultSet resultSet = statement.executeQuery()) {
-				return true;
+				if(resultSet.next()){
+					return true;
+				}else{
+					return false;
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -136,7 +156,5 @@ public class PizzaBddDao implements IPizzaDao {
 			e.printStackTrace();
 			return false;
 		}
-		
 	}
-
 }
