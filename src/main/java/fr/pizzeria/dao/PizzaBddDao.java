@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataBase.ConnexionBdd;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
@@ -18,6 +19,7 @@ public class PizzaBddDao implements IPizzaDao {
 
 	@Override
 	public List<Pizza> findAllPizzas() {
+		pizzas = new ArrayList<Pizza>();
 		try (PreparedStatement statement = connexion.prepareStatement("select * from pizzas")) {
 			// Récupération du curseur de résultat de l'exécution de la
 			// requêteSQL
@@ -49,26 +51,30 @@ public class PizzaBddDao implements IPizzaDao {
 
 	@Override
 	public void saveNewPizza(Pizza pizza) {
-		pizzas.add(pizza);
-		try (PreparedStatement statement = connexion
-				.prepareStatement("insert into pizzas (code,libelle,prix,categorie) values(?,?,?,?)")) {
-			// Récupération du curseur de résultat de l'exécution de la
-			// requêteSQL
-			// Valorisation du paramètre
-			statement.setString(1, pizza.getCode());
-			statement.setString(2, pizza.getLibelle());
-			statement.setDouble(3, pizza.getPrix());
-			statement.setString(4, pizza.getCat().toString());
+		if(pizzas.isEmpty()){
+			findAllPizzas();
+		}else {
+			pizzas.add(pizza);
+			try (PreparedStatement statement = connexion
+					.prepareStatement("insert into pizzas (code,libelle,prix,categorie) values(?,?,?,?)")) {
+				// Récupération du curseur de résultat de l'exécution de la
+				// requêteSQL
+				// Valorisation du paramètre
+				statement.setString(1, pizza.getCode());
+				statement.setString(2, pizza.getLibelle());
+				statement.setDouble(3, pizza.getPrix());
+				statement.setString(4, pizza.getCat().toString());
 
-			try (ResultSet resultSet = statement.executeQuery()) {
+				try (ResultSet resultSet = statement.executeQuery()) {
 
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
 		}
 	}
 
@@ -111,8 +117,26 @@ public class PizzaBddDao implements IPizzaDao {
 
 	@Override
 	public boolean pizzaExists(String codePizza) {
-		// TODO Auto-generated method stub
-		return false;
+		try (PreparedStatement statement = connexion
+				.prepareStatement("select * from pizzas where code=?")) {
+			// Récupération du curseur de résultat de l'exécution de la
+			// requêteSQL
+			// Valorisation du paramètre
+			statement.setString(1, codePizza);
+
+			try (ResultSet resultSet = statement.executeQuery()) {
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 
 }
