@@ -10,7 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
-import fr.pizzeria.dao.PizzaBddDao;
+import fr.pizzeria.dao.PizzaDaoBdd;
 import fr.pizzeria.exception.SavePizzaException;
 
 public class AjouterPizzaServiceTest {
@@ -19,7 +19,7 @@ public class AjouterPizzaServiceTest {
 
 	@Test
 	public void testExecuteUC() {
-		PizzaBddDao dao = new PizzaBddDao();
+		PizzaDaoBdd dao = new PizzaDaoBdd();
 		assertEquals(8, dao.findAllPizzas().size());
 		systemInMock.provideLines("TES", "TEST", "10", "viande");
 		AjouterPizzaService ajout = new AjouterPizzaService();

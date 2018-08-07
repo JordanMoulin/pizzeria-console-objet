@@ -12,7 +12,7 @@ import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaBddDao implements IPizzaDao {
+public class PizzaDaoBdd implements IPizzaDao {
 
 	private ArrayList<Pizza> pizzas = new ArrayList<Pizza>();
 	private Connection connexion = ConnexionBdd.getInstance();

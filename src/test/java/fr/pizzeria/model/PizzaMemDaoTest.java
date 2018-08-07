@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import fr.pizzeria.dao.PizzaMemDao;
+import fr.pizzeria.dao.PizzaDaoMem;
 
 public class PizzaMemDaoTest {
-	private PizzaMemDao dao = new PizzaMemDao();
+	private PizzaDaoMem dao = new PizzaDaoMem();
 	private Pizza pizza = new Pizza("TES", "TEST", 0, CategoriePizza.SANS_VIANDE);
 	private Pizza find;
 

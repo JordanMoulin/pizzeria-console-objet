@@ -6,7 +6,7 @@ import java.util.List;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaMemDao implements IPizzaDao {
+public class PizzaDaoMem implements IPizzaDao {
 	private ArrayList<Pizza> pizzas;
 
 	public ArrayList<Pizza> getPizzas() {
@@ -17,7 +17,7 @@ public class PizzaMemDao implements IPizzaDao {
 		this.pizzas = pizzas;
 	}
 
-	public PizzaMemDao() {
+	public PizzaDaoMem() {
 		pizzas = new ArrayList<Pizza>();
 		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.SANS_VIANDE));
 		pizzas.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.POISSON));

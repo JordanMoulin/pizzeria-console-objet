@@ -2,20 +2,36 @@ package fr.pizzeria.model;
 
 import java.lang.reflect.Field;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import fr.pizzeria.utils.ToString;
 
+@Entity
+@Table(name = "pizzas")
 public class Pizza {
+
+	@Id // Déclare à JPA quel champ représente la clé primaire
+	@Column(name = "id")
 	private int id;
 
+	@Column(name = "code")
 	@ToString(uppercase = true, apres = " -> ")
 	private String code;
 
+	@Column(name = "libelle")
 	@ToString(avant = "", uppercase = true)
 	private String libelle;
 
+	@Column(name = "prix")
 	@ToString(avant = " (", apres = "€)")
 	private double prix;
 
+	@Enumerated(EnumType.STRING)
 	private CategoriePizza cat;
 
 	public CategoriePizza getCat() {
@@ -27,6 +43,10 @@ public class Pizza {
 	}
 
 	static int compteur;
+
+	public Pizza() {
+
+	}
 
 	public Pizza(String code, String libelle, double prix, CategoriePizza cat) {
 		compteur++;

@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import fr.pizzeria.dao.PizzaBddDao;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.SavePizzaException;
 
 public class AjouterPizzaService extends MenuService {
@@ -15,7 +15,7 @@ public class AjouterPizzaService extends MenuService {
 	private int cat;
 
 	@Override
-	public void executeUC(Scanner scanner, PizzaBddDao dao) throws SavePizzaException {
+	public void executeUC(Scanner scanner, IPizzaDao dao) throws SavePizzaException {
 		System.out.println("Ajout d’une nouvelle pizza :\n Veuillez saisir le code (3 lettres) :");
 		code = scanner.next();
 		System.out.println("Veuillez saisir le nom (sans espace) :");

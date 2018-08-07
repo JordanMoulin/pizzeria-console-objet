@@ -2,9 +2,9 @@ package fr.pizzeria.model;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.PizzaBddDao;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 
 public abstract class MenuService {
-	abstract void executeUC(Scanner scanner, PizzaBddDao pizzas) throws StockageException;
+	abstract void executeUC(Scanner scanner, IPizzaDao pizzas) throws StockageException;
 }

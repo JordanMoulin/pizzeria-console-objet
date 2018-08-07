@@ -9,12 +9,12 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import fr.pizzeria.dao.PizzaBddDao;
+import fr.pizzeria.dao.IPizzaDao;
 
 public class ExportPizza extends MenuService {
 
 	@Override
-	public void executeUC(Scanner scanner, PizzaBddDao pizzas) {
+	public void executeUC(Scanner scanner, IPizzaDao pizzas) {
 		Document document = new Document();
 		try {
 			PdfWriter.getInstance(document, new FileOutputStream("iTextTable.pdf"));

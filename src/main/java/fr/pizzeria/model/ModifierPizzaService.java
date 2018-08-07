@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import fr.pizzeria.dao.PizzaBddDao;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.UpdatePizzaException;
 
 public class ModifierPizzaService extends MenuService {
@@ -16,7 +16,7 @@ public class ModifierPizzaService extends MenuService {
 	private int cat;
 
 	@Override
-	public void executeUC(Scanner scanner, PizzaBddDao pizzas) throws UpdatePizzaException {
+	public void executeUC(Scanner scanner, IPizzaDao pizzas) throws UpdatePizzaException {
 		System.out.println("Mise à jour d’une pizza :");
 		pizzas.findAllPizzas();
 		System.out.println("Choisir le code de la pizza à modifier :");

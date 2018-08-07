@@ -2,7 +2,8 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.PizzaBddDao;
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDaoJPA;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.AjouterPizzaService;
@@ -15,8 +16,7 @@ public class PizzeriaAdminConsoleApp {
 	public static void main(String[] args) {
 
 		/* Variables */
-		// PizzaMemDao dao = new PizzaMemDao();
-		PizzaBddDao dao = new PizzaBddDao();
+		IPizzaDao dao = new PizzaDaoJPA();
 		int choixM = 0;
 		Scanner scanner = new Scanner(System.in);
 
